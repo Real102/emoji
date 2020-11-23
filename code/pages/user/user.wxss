@@ -1,2 +1,20 @@
 /* pages/user/user.wxss */
+.user {}
 
+.user .headImg {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 30px auto;
+  border-radius: 80px;
+  border: 2px solid #cccccc;
+  overflow: hidden;
+}
+
+.user .nickName {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+}

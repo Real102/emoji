@@ -1,4 +1,7 @@
 <!--pages/user/user.wxml-->
 <view class="user">
-  <image src="{{headImg}}"></image>
+    <open-data type="userAvatarUrl" class="headImg"></open-data>
+    <open-data type="userNickName" class="nickName"></open-data>
+  <!-- <image src="{{userInfo.avatarUrl}}" class="headImg"></image> -->
+  <!-- <text class="nickName">{{userInfo.nickName}}</text> -->
 </view>
