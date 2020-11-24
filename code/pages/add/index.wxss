@@ -1,1 +1,39 @@
 /* pages/add/index.wxss */
+.add {
+  width: 100%;
+  height: 100%;
+}
+
+.add .addCon{
+  position: fixed;
+  bottom: 20rpx;
+  left: 5%;
+  width: 90%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add .inputCon {
+  display: block;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border: 1px solid #cccccc;
+  border-radius: 6rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  text-indent: 20rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.add .addButton{
+  height: 80rpx;
+  width: 100%;
+  font-size: 14px;
+  line-height: 80rpx;
+  padding: 0;
+  box-sizing: border-box;
+}

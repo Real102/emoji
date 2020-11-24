@@ -1,49 +1,48 @@
 //index.js
 //获取应用实例
 import {
-  emoji
+  emojiList
 } from '../../utils/emoji.js'
+import {
+  getItem,
+  setItem
+} from '../../utils/storage.js'
 const app = getApp()
 Page({
   data: {
-    emojiList: emoji,
+    emojiList: emojiList,
     recentlyList: [] // 近期使用emoji的列表
   },
   onLoad: function () {
     this.initStorageEmojiList()
     this.initRecentlyList()
   },
+  onShow: function () {
+    this.initRecentlyList()
+  },
   initStorageEmojiList: function () {
     let emojiList = []
     // 获取本地缓存的emoji
-    wx.getStorage({
-      key: 'emojiList',
-      success: res => {
-        emojiList = res.data
-      },
-      fail: err => {
-        console.log('no emoji in storage!')
-      }
-    })
-    // 将自己本地缓存的数据至顶
-    emojiList.push(...this.data.emojiList)
-    this.setData({
-      emojiList
+    getItem('userEmoji').then(data => {
+      emojiList = data
+      // 将自己本地缓存的数据至顶
+      emojiList.push(...this.data.emojiList)
+      this.setData({
+        emojiList
+      })
+    }).catch(err => {
+      console.log('no emoji in storage!')
     })
   },
   initRecentlyList: function () {
-    wx.getStorage({
-      key: 'recentlyList',
-      success: res => {
-        this.setData({
-          recentlyList: res.data
-        })
-      },
-      fail: err => {
-        this.setData({
-          recentlyList: []
-        })
-      }
+    getItem('recentlyList').then(recentlyList => {
+      this.setData({
+        recentlyList
+      })
+    }).catch(err => {
+      this.setData({
+        recentlyList: []
+      })
     })
   },
   copyText: function (event) {
@@ -72,13 +71,10 @@ Page({
       this.setData({
         recentlyList
       })
-      wx.setStorage({
-        data: recentlyList,
-        key: 'recentlyList',
-      })
+      setItem('recentlyList', recentlyList)
     }
   },
-  turnToAddEmoji: function() {
+  turnToAddEmoji: function () {
     // 跳转到添加 Emoji 页面
     wx.navigateTo({
       url: '/pages/add/index',

@@ -31,6 +31,7 @@
   height: 100rpx;
   box-sizing: border-box;
   box-shadow: 0 1px 5px #ccc;
+  background: #fff;
 }
 
 .container .recently-use>view {

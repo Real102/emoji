@@ -1,2 +1,7 @@
 <!--pages/add/index.wxml-->
-<text>添加 Emoji</text>
+<view class="add">
+  <view class="addCon">
+    <input type="text" placeholder="一次可以添加多个奥~(注意不要有任何其他字符)" class="inputCon" placeholder-style="color:#ccc" bindinput="handleInput" />
+    <button type="primary" class="addButton" bindtap="addEmoji">添加</button>
+  </view>
+</view>
