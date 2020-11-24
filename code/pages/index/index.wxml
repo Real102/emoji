@@ -1,12 +1,20 @@
 <!--index.wxml-->
 <view class="container">
   <view class="emo-cont" bindtap="copyText">
-    <text class="emo-one" wx:for="{{emojiList}}" wx:key="key" data-text="{{item.text}}">{{item.text}}</text>
+    <text class="emo-one" wx:for="{{emojiList}}" wx:key="key" data-text="{{item.text}}"
+      data-key="{{item.key}}">{{item.text}}</text>
     <text class="emo-one"></text>
     <text class="emo-one"></text>
     <text class="emo-one"></text>
     <text class="emo-one"></text>
     <text class="emo-one"></text>
     <text class="emo-one"></text>
+  </view>
+  <view class="recently-use">
+    <view wx:if="{{recentlyList.length > 0}}" bindtap="copyText">
+      <text class="emo-one" wx:for="{{recentlyList}}" wx:key="unique" data-text="{{item.text}}"
+        data-key="{{item.key}}">{{item.text}}</text>
+    </view>
+    <text wx:else>空空如也...</text>
   </view>
 </view>
