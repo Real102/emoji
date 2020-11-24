@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="emo-cont" bindtap="copyText">
+    <text class="emo-one" bindtap="turnToAddEmoji">😎</text>
     <text class="emo-one" wx:for="{{emojiList}}" wx:key="key" data-text="{{item.text}}"
       data-key="{{item.key}}">{{item.text}}</text>
     <text class="emo-one"></text>

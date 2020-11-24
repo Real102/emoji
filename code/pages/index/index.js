@@ -1,15 +1,37 @@
 //index.js
 //获取应用实例
 import {
-  emojiList
+  emoji
 } from '../../utils/emoji.js'
 const app = getApp()
 Page({
   data: {
-    emojiList: emojiList,
+    emojiList: emoji,
     recentlyList: [] // 近期使用emoji的列表
   },
   onLoad: function () {
+    this.initStorageEmojiList()
+    this.initRecentlyList()
+  },
+  initStorageEmojiList: function () {
+    let emojiList = []
+    // 获取本地缓存的emoji
+    wx.getStorage({
+      key: 'emojiList',
+      success: res => {
+        emojiList = res.data
+      },
+      fail: err => {
+        console.log('no emoji in storage!')
+      }
+    })
+    // 将自己本地缓存的数据至顶
+    emojiList.push(...this.data.emojiList)
+    this.setData({
+      emojiList
+    })
+  },
+  initRecentlyList: function () {
     wx.getStorage({
       key: 'recentlyList',
       success: res => {
@@ -55,5 +77,11 @@ Page({
         key: 'recentlyList',
       })
     }
+  },
+  turnToAddEmoji: function() {
+    // 跳转到添加 Emoji 页面
+    wx.navigateTo({
+      url: '/pages/add/index',
+    })
   }
 })
