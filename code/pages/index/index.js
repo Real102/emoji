@@ -7,35 +7,62 @@ import {
   getItem,
   setItem
 } from '../../utils/storage.js'
+import {
+  emojiToCode,
+  codeToEmoji
+} from '../../utils/emoji.js'
 const app = getApp()
 Page({
   data: {
-    emojiList: emojiList,
+    systemEmojiList: emojiList,
+    emojiList: [],
     recentlyList: [] // 近期使用emoji的列表
   },
   onLoad: function () {
-    this.initStorageEmojiList()
-    this.initRecentlyList()
+    // this.initStorageEmojiList()
+    // this.initRecentlyList()
+    // 需要清空用户数据，请开启下面方法
+    // setItem('userEmoji', [])
   },
   onShow: function () {
+    this.initStorageEmojiList()
     this.initRecentlyList()
   },
   initStorageEmojiList: function () {
     let emojiList = []
     // 获取本地缓存的emoji
     getItem('userEmoji').then(data => {
-      emojiList = data
+      emojiList = data.map(item => {
+        return {
+          key: item.key,
+          text: codeToEmoji(item.text)
+        }
+      })
       // 将自己本地缓存的数据至顶
-      emojiList.push(...this.data.emojiList)
+      emojiList.push(...this.data.systemEmojiList)
       this.setData({
         emojiList
       })
     }).catch(err => {
-      console.log('no emoji in storage!')
+      // 本地没有用户上传的Emoji，那么显示系统提供的Emoji
+      this.setData({
+        emojiList: this.data.systemEmojiList
+      })
+      wx.showToast({
+        title: 'no emoji in storage!',
+        icon: 'none'
+      })
     })
   },
   initRecentlyList: function () {
-    getItem('recentlyList').then(recentlyList => {
+    getItem('recentlyList').then(res => {
+      // 获取最近使用的emoji码点列表，并将码点转换成emoji存到recentlyList中
+      let recentlyList = res.map(item => {
+        return {
+          key: item.key,
+          text: codeToEmoji(item.text)
+        }
+      })
       this.setData({
         recentlyList
       })
@@ -70,6 +97,12 @@ Page({
       })
       this.setData({
         recentlyList
+      })
+      recentlyList = recentlyList.map(item => {
+        return {
+          key: item.key,
+          text: emojiToCode(item.text)
+        }
       })
       setItem('recentlyList', recentlyList)
     }

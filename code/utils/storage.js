@@ -6,8 +6,7 @@ const getItem = key => {
         resolve(res.data)
       },
       fail: err => {
-        console.log('no emoji in storage!')
-        reject()
+        reject(err)
       }
     })
   })
@@ -22,8 +21,7 @@ const setItem = (key, data) => {
         resolve(res.data)
       },
       fail: err => {
-        console.log('no emoji in storage!')
-        reject()
+        reject(err)
       }
     })
   })
