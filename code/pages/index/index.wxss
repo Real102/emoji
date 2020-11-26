@@ -21,6 +21,7 @@
   font-size: 60rpx;
   line-height: 100rpx;
   text-align: center;
+  overflow: hidden;
 }
 
 .container .recently-use {

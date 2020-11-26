@@ -4,12 +4,12 @@
   height: 100%;
 }
 
-.add .addCon{
+.add .addCon {
   position: fixed;
   bottom: 20rpx;
   left: 5%;
   width: 90%;
-  height: 180rpx;
+  height: 280rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,11 +29,17 @@
   box-sizing: border-box;
 }
 
-.add .addButton{
+.add .addButton,
+.add .clearButton {
   height: 80rpx;
   width: 100%;
   font-size: 14px;
   line-height: 80rpx;
   padding: 0;
   box-sizing: border-box;
+}
+
+.add .clearButton {
+  background: #e64340;
+  color: #fff;
 }

@@ -21,8 +21,6 @@ Page({
   onLoad: function () {
     // this.initStorageEmojiList()
     // this.initRecentlyList()
-    // 需要清空用户数据，请开启下面方法
-    // setItem('userEmoji', [])
   },
   onShow: function () {
     this.initStorageEmojiList()

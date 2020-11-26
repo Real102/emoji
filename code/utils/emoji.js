@@ -32,12 +32,12 @@ const emojiList = [{
 }]
 
 const emojiToCode = emoji => {
-  // 有些表情是一个码点的？
-  if (emoji.length > 1) {
-    return `${emoji[0].codePointAt(0).toString(16)}-${emoji[1].codePointAt(0).toString(16)}`
-  } else {
-    return `${emoji[0].codePointAt(0).toString(16)}`
-  }
+  // 表情的码点可能有多个，因此需要遍历处理
+  let res = []
+  Array.from(emoji).forEach(i => {
+    res.push(i.codePointAt(0).toString(16))
+  });
+  return res.join('-')
 }
 
 const codeToEmoji = code => {
